@@ -1,38 +1,5 @@
-<<<<<<< HEAD
 /node_modules
 /dist
 /.tmp
 /.sass-cache
 /bower_components
-=======
-# Node and related ecosystem
-# ==========================
-.nodemonignore
-.sass-cache/
-node_modules/
-public/lib/
-app/tests/coverage/
-.bower-*/
-.idea/
-coverage/
-
-# General
-# =======
-*.log
-*.csv
-*.dat
-*.out
-*.pid
-*.gz
-*.tmp
-*.bak
-*.swp
-logs/
-build/
-
-# Sublime editor
-# ==============
-.sublime-project
-*.sublime-project
-*.sublime-workspace
->>>>>>> 1e4e160315da8142743feab1f1a3baa5f443d8a6

@@ -1,24 +1,40 @@
 <div class="container">
   <h2>Articles</h2>
 
-  <!-- Todos input -->
-  <form role="form" ng-submit="addArticle()">
-    <div class="row">
-      <div class="input-group">
-        <input type="text" ng-model="article" placeholder="What needs to be written?" class="form-control">
-        <span class="input-group-btn">
-          <input type="submit" class="btn btn-primary" value="Add">
-        </span>
-      </div>
-    </div>
-  </form>
+    <!-- Article input -->
+    <form ng-submit="sendArticle()">
+      Titulo: <input placeholder="What needs to be written?" ng-model="article.title"> <br />
+      Tags: <input ng-model="article.tags"><br />
+      Sum&aacute;rio: <textarea ng-model="article.excerpt" ng-required="true"></textarea><br />
+      Conte&uacute;do: <textarea ng-model="article.content" ng-required="true"></textarea><br />
+      <input type="submit" class="btn btn-primary" value="Add">
+    </form>
+
   
-<!-- Todos list -->
-<p class="input-group" ng-repeat="article in articles">
-  <input type="text" ng-model="article" class="form-control">
-  <span class="input-group-btn">
-    <button class="btn btn-danger" ng-click="removeArticle($index)" aria-label="Remove">X</button>
-  </span>
-</p>
+    <!-- Article list -->
+    <ul>
+      <li ng-repeat='article in articles'>
+        <p>{{article.title}}</p>
+        <div class="btn-group" role="group" aria-label="...">
+          <button ng-click="showArticle(article)" type="button" class="btn btn-default">Visualizar</button>
+          <button ng-click="editArticle(article)" type="button" class="btn btn-default">Editar</button>
+          <button ng-click="removeArticle(article)" type="button" class="btn btn-default">Remove</button>
+        </div>
+      </li>
+    </ul>
+
+    <!-- Current article -->
+    <div ng-if="currentArticle">
+      <dl>
+        <dd>Título</dd>
+        <dt>{{currentArticle.title}}</dt>
+
+        <dd>Sum&aacute;rio</dd>
+        <dt>{{currentArticle.excerpt}}</dt>
+
+        <dd>Conte&uacute;do:</dd>
+        <dt>{{currentArticle.content}}</dt>
+      </dl>
+    </div>
 
 </div>
