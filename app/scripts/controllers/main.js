@@ -18,21 +18,38 @@ angular.module('frontarticlesApp')
         this.tags= "";
     }
 
+    $scope.close_modal= true;
     $scope.articles = [];
     $scope.article= new Article();
+    $scope.currentArticle= null;
 
   	var addArticle = function () {
   	  $scope.articles.push($scope.article);
   	  $scope.article = '';
 
       toastr.success('O artigo foi inserido', 'Toastr fun!');
+      $('#formModal').modal('hide');
   	};
+
+    var updateArticle = function() {
+      var article = $scope.articles.find(function(element) {
+          return element === $scope.article;
+      });
+
+      if(article !== undefined) {
+        article = $scope.article;
+        toastr.success('O artigo foi alterado', 'Toastr fun!');
+        $('#formModal').modal('hide');
+      }
+      
+    };
 
     $scope.showArticle = function(article) {
       $scope.currentArticle = article;
     };
 
     $scope.editArticle = function(article) {
+      $scope.currentArticle= null;
       $scope.article = article;
     };
 
@@ -43,7 +60,12 @@ angular.module('frontarticlesApp')
     };
 
     $scope.sendArticle = function() {
-      addArticle();
+
+      if($.inArray($scope.article, $scope.articles) === 0) {
+        updateArticle();
+      } else {
+        addArticle();
+      }      
     };
-    
+
   });

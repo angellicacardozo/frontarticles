@@ -1,14 +1,6 @@
 <div class="container">
   <h2>Articles</h2>
-
-    <!-- Article input -->
-    <form ng-submit="sendArticle()">
-      Titulo: <input placeholder="What needs to be written?" ng-model="article.title"> <br />
-      Tags: <input ng-model="article.tags"><br />
-      Sum&aacute;rio: <textarea ng-model="article.excerpt" ng-required="true"></textarea><br />
-      Conte&uacute;do: <textarea ng-model="article.content" ng-required="true"></textarea><br />
-      <input type="submit" class="btn btn-primary" value="Add">
-    </form>
+  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#formModal">Novo artigo</button>
 
   
     <!-- Article list -->
@@ -16,25 +8,52 @@
       <li ng-repeat='article in articles'>
         <p>{{article.title}}</p>
         <div class="btn-group" role="group" aria-label="...">
-          <button ng-click="showArticle(article)" type="button" class="btn btn-default">Visualizar</button>
-          <button ng-click="editArticle(article)" type="button" class="btn btn-default">Editar</button>
+          <button ng-click="showArticle(article)" data-toggle="modal" data-target="#formModal" type="button" class="btn btn-default">Visualizar</button>
+          <button ng-click="editArticle(article)" data-toggle="modal" data-target="#formModal" type="button" class="btn btn-default">Editar</button>
           <button ng-click="removeArticle(article)" type="button" class="btn btn-default">Remove</button>
         </div>
       </li>
     </ul>
 
-    <!-- Current article -->
-    <div ng-if="currentArticle">
-      <dl>
-        <dd>Título</dd>
-        <dt>{{currentArticle.title}}</dt>
+<!-- Modal -->
+<div id="formModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
 
-        <dd>Sum&aacute;rio</dd>
-        <dt>{{currentArticle.excerpt}}</dt>
+    <!-- Modal content-->
+    <div class="modal-content">
 
-        <dd>Conte&uacute;do:</dd>
-        <dt>{{currentArticle.content}}</dt>
-      </dl>
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modal Header</h4>
+      </div>
+      <div class="modal-body">
+        <!-- Article input -->
+        <form ng-if="currentArticle===null"  ng-submit="sendArticle()">
+          Titulo: <input placeholder="What needs to be written?" ng-model="article.title"> <br />
+          Tags: <input ng-model="article.tags"><br />
+          Sum&aacute;rio: <textarea ng-model="article.excerpt" ng-required="true"></textarea><br />
+          Conte&uacute;do: <textarea ng-model="article.content" ng-required="true"></textarea><br />
+          <input type="submit" class="btn btn-primary" value="Add">
+        </form>
+
+        <dl ng-if="currentArticle!==null">
+          <dd>Título</dd>
+          <dt>{{currentArticle.title}}</dt>
+
+          <dd>Sum&aacute;rio</dd>
+          <dt>{{currentArticle.excerpt}}</dt>
+
+          <dd>Conte&uacute;do:</dd>
+          <dt>{{currentArticle.content}}</dt>
+        </dl>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
     </div>
 
+
+</div>
 </div>
