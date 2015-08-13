@@ -31,6 +31,21 @@ module.exports = function (grunt) {
     // Project settings
     yeoman: appConfig,
 
+    buildcontrol: {
+      pages: {
+        options: {
+          remote: 'git@github.com:example_user/example_webapp.git',
+          branch: 'gh-pages'
+        }
+      },
+      local: {
+        options: {
+          remote: '../',
+          branch: 'build'
+        }
+      }
+    },
+
     // Watches files for changes and runs tasks based on the changed files
     watch: {
       bower: {
