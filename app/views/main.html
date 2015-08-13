@@ -3,36 +3,40 @@
   <button type="button" ng-click="newArticle()" class="btn btn-info btn-lg" data-toggle="modal" data-target="#formModal">Novo artigo</button>
 
   <!-- Article list -->
-  <ul>
-    <li ng-repeat='article in articles'>
-      <p>{{article.title}}, {{article.title | slugPattern}}</p>
-      <div class="btn-group" role="group" aria-label="...">
-        <button ng-click="showArticle(article)" data-toggle="modal" data-target="#formModal" type="button" class="btn btn-default">Visualizar</button>
-        <button ng-click="editArticle(article)" data-toggle="modal" data-target="#formModal" type="button" class="btn btn-default">Editar</button>
-        <button ng-click="removeArticle(article)" type="button" class="btn btn-default">Remove</button>
-      </div>
-      <a href="#"
-        socialshare
-        socialshare-provider="facebook"
-        socialshare-text="720kb angular-socialshare"
-        socialshare-url="http://720kb.net">
-        Share me on FB
-      </a>
-      <a href="#"
-        socialshare
-        socialshare-provider="google+"
-        socialshare-url="http://my_page_url">
-        Share me G+
-      </a>
-      <a href="#"
-        socialshare
-        socialshare-provider="twitter"
-        socialshare-url="http://720kb.net"
-        socialshare-hashtags="{{article.tags}}">
-        Share me on Twitter
-      </a>
-    </li>
-  </ul>
+  <div infinite-scroll='loadMore()'>
+    <section>
+      <h1>Artigos cadastrados</h1>
+      <article  ng-repeat='article in articles | reverselist | limitTo:limit'>
+        <h1>{{article.title}}, {{article.title | slugPattern}}</h1>
+        <p>{{article.excerpt}}</p>
+        <div class="btn-group" role="group" aria-label="...">
+          <button ng-click="showArticle(article)" data-toggle="modal" data-target="#formModal" type="button" class="btn btn-default">Visualizar</button>
+          <button ng-click="editArticle(article)" data-toggle="modal" data-target="#formModal" type="button" class="btn btn-default">Editar</button>
+          <button ng-click="removeArticle(article)" type="button" class="btn btn-default">Remove</button>
+        </div>
+        <a href="#"
+          socialshare
+          socialshare-provider="facebook"
+          socialshare-text="720kb angular-socialshare"
+          socialshare-url="http://720kb.net">
+          Share me on FB
+        </a>
+        <a href="#"
+          socialshare
+          socialshare-provider="google+"
+          socialshare-url="http://my_page_url">
+          Share me G+
+        </a>
+        <a href="#"
+          socialshare
+          socialshare-provider="twitter"
+          socialshare-url="http://720kb.net"
+          socialshare-hashtags="{{article.tags}}">
+          Share me on Twitter
+        </a>
+      </article>
+    </section>
+  </div>
 
 <!-- Modal -->
 <div id="formModal" class="modal fade" role="dialog">
@@ -47,7 +51,7 @@
         <h4 class="modal-title">
           <span ng-if="currentArticle!==null">{{currentArticle.title}} | Artigo</span>
           <span ng-if="article.title!=='' && currentArticle===null">Editar {{article.title}}</span>
-          <span ng-if="currentArticle===null">Novo Artigo</span>
+          <span ng-if="article.title==='' &&currentArticle===null">Novo Artigo</span>
         </h4>
       </div>
       <div class="modal-body">

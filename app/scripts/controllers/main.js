@@ -15,6 +15,11 @@ angular.module('frontarticlesApp')
                 .replace(/ +/g,'-');
       };    
   })
+  .filter('reverselist', function() {
+    return function(items) {
+      return items.slice().reverse();
+    };
+  })
   .controller('MainCtrl', function ($scope, toastr, localStorageService) {
 
     function Article() {
@@ -24,6 +29,8 @@ angular.module('frontarticlesApp')
         this.content= ""; //conteudo
         this.tags= "";
     }
+
+    $scope.limit= 5;
 
     $scope.close_modal= true;
     var articlesInStore = localStorageService.get('articles');
@@ -57,6 +64,10 @@ angular.module('frontarticlesApp')
       
     };
 
+    $scope.init = function () {
+        console.log('Initing ...')
+    }    
+
     $scope.newArticle = function() {
       $scope.currentArticle= null;
       $scope.article= new Article();
@@ -71,8 +82,14 @@ angular.module('frontarticlesApp')
       $scope.article = article;
     };
 
-    $scope.removeArticle = function (index) {
-      $scope.articles.splice(index, 1);
+    $scope.removeArticle = function (article) {
+      console.log('removing ', article);
+
+       $scope.articles= $scope.articles
+               .filter(function (el) {
+                console.log('removing ', article===el);
+                  return el!==article;
+               });
 
       toastr.info('O artigo foi removido', 'Information');
     };
@@ -86,4 +103,13 @@ angular.module('frontarticlesApp')
       }      
     };
 
+    $scope.loadMore = function() {
+
+      var newlimit= $scope.limit + 5;
+      if($scope.articles.length < newlimit) {
+        newlimit= $scope.articles.length;
+      } 
+
+      $scope.limit= newlimit;
+    };
   });

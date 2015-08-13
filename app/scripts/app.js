@@ -18,7 +18,8 @@ angular
     'ngTouch',
     'toastr',
     '720kb.socialshare',
-    'LocalStorageModule'
+    'LocalStorageModule',
+    'infinite-scroll'
   ])
   .config(['localStorageServiceProvider', function(localStorageServiceProvider){
     localStorageServiceProvider.setPrefix('ls');
