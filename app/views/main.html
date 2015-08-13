@@ -1,4 +1,9 @@
 <div class="container">
+
+  <div ng-if="articles.length===0" class="alert alert-info">
+    <strong>Info!</strong> Nenhum artigo cadastrado.
+  </div>
+
   <!-- Article list -->
   <div infinite-scroll='loadMore()'>
     <section>
