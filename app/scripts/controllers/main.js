@@ -12,10 +12,21 @@ angular.module('frontarticlesApp')
 
     function Article() {
         this.title= "";
-        this.slug= "";
         this.excerpt= ""; //sumário
         this.content= ""; //conteudo
         this.tags= "";
+
+        Object.defineProperty(this, "slug", {
+          get : function () {
+            console.log('Get slug', this.title);
+            return this.title.toLowerCase()
+                .replace(/[^\w ]+/g,'')
+                .replace(/ +/g,'-');
+          },
+          set : function (val) {
+            console.log('Dont');
+          }
+        });
     }
 
     $scope.close_modal= true;
