@@ -11,6 +11,26 @@
         <button ng-click="editArticle(article)" data-toggle="modal" data-target="#formModal" type="button" class="btn btn-default">Editar</button>
         <button ng-click="removeArticle(article)" type="button" class="btn btn-default">Remove</button>
       </div>
+      <a href="#"
+        socialshare
+        socialshare-provider="facebook"
+        socialshare-text="720kb angular-socialshare"
+        socialshare-url="http://720kb.net">
+        Share me on FB
+      </a>
+      <a href="#"
+        socialshare
+        socialshare-provider="google+"
+        socialshare-url="http://my_page_url">
+        Share me G+
+      </a>
+      <a href="#"
+        socialshare
+        socialshare-provider="twitter"
+        socialshare-url="http://720kb.net"
+        socialshare-hashtags="{{article.tags}}">
+        Share me on Twitter
+      </a>
     </li>
   </ul>
 
