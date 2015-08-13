@@ -18,8 +18,6 @@ angular.module('frontarticlesApp')
   .filter('reverselist', function() {
     return function(items) {
 
-      console.log('reversing', items);
-
       if(items.length > 0) {
         return items.slice().reverse();
       }
