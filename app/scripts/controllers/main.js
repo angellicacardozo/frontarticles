@@ -47,7 +47,7 @@ angular.module('frontarticlesApp')
   	  $scope.articles.push($scope.article);
   	  $scope.article = '';
 
-      toastr.success('O artigo foi inserido', 'Toastr fun!');
+      toastr.success('O artigo foi inserido', 'Inserir...');
       $('#formModal').modal('hide');
   	};
 
@@ -58,12 +58,12 @@ angular.module('frontarticlesApp')
 
       if(article !== undefined) {
         article = $scope.article;
-        toastr.success('O artigo foi alterado', 'Toastr fun!');
+        toastr.success('O artigo foi alterado', 'Alterar...');
         $('#formModal').modal('hide');
       }
       
     };
-    
+
     $scope.newArticle = function() {
       $scope.currentArticle= null;
       $scope.article= new Article();
@@ -85,7 +85,7 @@ angular.module('frontarticlesApp')
                   return el!==article;
                });
 
-      toastr.info('O artigo foi removido', 'Aten&ccedil;&atilde;o');
+      toastr.info('O artigo foi removido', 'Remover...');
     };
 
     $scope.sendArticle = function() {
@@ -107,4 +107,25 @@ angular.module('frontarticlesApp')
 
       $scope.limit= newlimit;
     };
+
+    $scope.cancelArticle = function() {
+
+      console.log('Really cancel?');
+    };
+
+    $scope.init = function() {
+
+        $('#formModal').on('hidden.bs.modal', function () {
+
+          console.log('form on hidden.bs.modal');
+
+          $scope.article= new Article();
+
+          if($scope.currentArticle !== null) {
+            $scope.currentArticle = null;
+          }
+        });
+    };
+
+    $scope.init();
   });

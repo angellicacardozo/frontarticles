@@ -1,14 +1,11 @@
 <div class="container">
-  <h2>Articles</h2>
-  <button type="button" ng-click="newArticle()" class="btn btn-info btn-lg" data-toggle="modal" data-target="#formModal">Novo artigo</button>
-
   <!-- Article list -->
   <div infinite-scroll='loadMore()'>
     <section>
       <h1>Artigos cadastrados</h1>
       <article  ng-repeat='article in articles | reverselist | limitTo:limit'>
         <h1>{{article.title}}, {{article.title | slugPattern}}</h1>
-        <p>{{article.excerpt}}</p>
+        <p class="excerpt">{{article.excerpt}}</p>
         <div class="btn-group" role="group" aria-label="...">
           <button ng-click="showArticle(article)" data-toggle="modal" data-target="#formModal" type="button" class="btn btn-default">Visualizar</button>
           <button ng-click="editArticle(article)" data-toggle="modal" data-target="#formModal" type="button" class="btn btn-default">Editar</button>
@@ -56,28 +53,52 @@
       </div>
       <div class="modal-body">
         <!-- Article input -->
-        <form ng-if="currentArticle===null"  ng-submit="sendArticle()">
-          Titulo: <input ng-required="true" placeholder="What needs to be written?" ng-model="article.title"> <br />
-          Tags: <input ng-required="true" ng-model="article.tags"><br />
-          Sum&aacute;rio: <textarea ng-model="article.excerpt" ng-required="true"></textarea><br />
-          Conte&uacute;do: <textarea ng-model="article.content" ng-required="true"></textarea><br />
-          <input type="submit" class="btn btn-primary" value="Add">
+        <form class="form-horizontal" role="form" name="articleForm" ng-if="currentArticle===null" ng-submit="sendArticle()" unsaved-warning-form>
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="titulo">Titulo:</label>
+            <div class="col-sm-10">
+              <input id="titulo" name="titulo" ng-required="true" placeholder="Pensa em escrever o que?" ng-model="article.title">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="titulo">Tags:</label>
+            <div class="col-sm-10">
+              <input ng-required="true" ng-model="article.tags">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="titulo">Sum&aacute;rio:</label>
+            <div class="col-sm-10">
+              <textarea ng-model="article.excerpt" ng-required="true"></textarea>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="titulo">Conte&uacute;do:</label>
+            <div class="col-sm-10">
+              <textarea ng-model="article.content" ng-required="true"></textarea>
+            </div>
+          </div>
+
+          <input type="submit" class="btn btn-primary" value="Salvar">
         </form>
 
         <dl ng-if="currentArticle!==null">
-          <dd>Título</dd>
-          <dt>{{currentArticle.title}}</dt>
+          <dt>Título</dt>
+          <dd>{{currentArticle.title}}</dd>
 
-          <dd>Sum&aacute;rio</dd>
-          <dt>{{currentArticle.excerpt}}</dt>
+          <dt>Sum&aacute;rio</dt>
+          <dd>{{currentArticle.excerpt}}</dd>
 
-          <dd>Conte&uacute;do:</dd>
-          <dt>{{currentArticle.content}}</dt>
+          <dt>Conte&uacute;do:</dt>
+          <dd>{{currentArticle.content}}</dd>
         </dl>
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button ng-click="cancelArticle()" type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
       </div>
     </div>
 
