@@ -57,6 +57,11 @@ angular.module('frontarticlesApp')
       
     };
 
+    $scope.newArticle = function() {
+      $scope.currentArticle= null;
+      $scope.article= new Article();
+    };
+
     $scope.showArticle = function(article) {
       $scope.currentArticle = article;
     };
