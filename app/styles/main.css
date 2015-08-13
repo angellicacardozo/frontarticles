@@ -7,6 +7,7 @@
 
 body {
   padding: 0;
+  background-color: #eff4f6;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -51,16 +52,41 @@ body {
   padding: 14px 24px;
 }
 
-/* Supporting marketing content */
-.marketing {
-  margin: 40px 0;
+.navbar-default {
+    background-color: #04c9db;
+    border-bottom: 1px solid #fff;
+    color: #000;
 }
-.marketing p + h4 {
-  margin-top: 28px;
+
+.navbar-default .navbar-brand, .navbar-default .navbar-brand:hover {
+    background-color: #000;
+    opacity: 0.5;
+}
+
+.navbar-default .navbar-brand:hover {
+  opacity: 0.8;
+}
+
+section > h1 {
+    border-left: 5px solid;
+    color: #04c9db;
+    margin-bottom: 56px;
+    padding-left: 18px;
+}
+
+article {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    margin-bottom: 15px;
+    padding: 0 18px 10px;
+    border-radius: 6px;
+}
+
+article h1 {
+  color: rgba(0, 0, 0, 0.5);
 }
 
 .excerpt {
-    color: #cdcdcd;
+    color: #ffffff;
     font-style: italic;
     margin: 0 0 10px;
     padding: 10px 10px 10px 40px;

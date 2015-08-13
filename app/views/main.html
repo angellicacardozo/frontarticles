@@ -11,25 +11,28 @@
           <button ng-click="editArticle(article)" data-toggle="modal" data-target="#formModal" type="button" class="btn btn-default">Editar</button>
           <button ng-click="removeArticle(article)" type="button" class="btn btn-default">Remove</button>
         </div>
-        <a href="#"
+        <a href="#/"
           socialshare
           socialshare-provider="facebook"
-          socialshare-text="720kb angular-socialshare"
-          socialshare-url="http://720kb.net">
-          Share me on FB
+          socialshare-text="{{article.excerpt}}"
+          socialshare-url="http://angellicacardozo.github.io/frontarticles/#/">
+            <img src="images/fb.png" />
         </a>
-        <a href="#"
+        <a href="#/"
           socialshare
           socialshare-provider="google+"
-          socialshare-url="http://my_page_url">
-          Share me G+
+          socialshare-text="{{article.excerpt}}"
+          socialshare-caption="{{article.title}}"
+          socialshare-url="http://angellicacardozo.github.io/frontarticles/#/l">
+            <img src="images/gplus.png" />
         </a>
-        <a href="#"
+        <a href="#/"
           socialshare
           socialshare-provider="twitter"
-          socialshare-url="http://720kb.net"
+          socialshare-url="http://angellicacardozo.github.io/frontarticles/#/"
+          socialshare-text="{{article.excerpt}}"
           socialshare-hashtags="{{article.tags}}">
-          Share me on Twitter
+            <img src="images/tw.png" />
         </a>
       </article>
     </section>
