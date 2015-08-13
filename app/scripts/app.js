@@ -17,8 +17,12 @@ angular
     'ngSanitize',
     'ngTouch',
     'toastr',
-    '720kb.socialshare'
+    '720kb.socialshare',
+    'LocalStorageModule'
   ])
+  .config(['localStorageServiceProvider', function(localStorageServiceProvider){
+    localStorageServiceProvider.setPrefix('ls');
+  }])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {

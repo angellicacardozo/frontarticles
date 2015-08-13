@@ -5,7 +5,7 @@
   <!-- Article list -->
   <ul>
     <li ng-repeat='article in articles'>
-      <p>{{article.title}}, {{article.slug}}</p>
+      <p>{{article.title}}, {{article.title | slugPattern}}</p>
       <div class="btn-group" role="group" aria-label="...">
         <button ng-click="showArticle(article)" data-toggle="modal" data-target="#formModal" type="button" class="btn btn-default">Visualizar</button>
         <button ng-click="editArticle(article)" data-toggle="modal" data-target="#formModal" type="button" class="btn btn-default">Editar</button>

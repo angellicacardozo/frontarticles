@@ -8,31 +8,33 @@
  * Controller of the frontarticlesApp
  */
 angular.module('frontarticlesApp')
-  .controller('MainCtrl', function ($scope, toastr) {
+  .filter('slugPattern', function(){    
+      return function(title){
+       return title.toLowerCase()
+                .replace(/[^\w ]+/g,'')
+                .replace(/ +/g,'-');
+      };    
+  })
+  .controller('MainCtrl', function ($scope, toastr, localStorageService) {
 
     function Article() {
         this.title= "";
+        this.slug= "";
         this.excerpt= ""; //sumário
         this.content= ""; //conteudo
         this.tags= "";
-
-        Object.defineProperty(this, "slug", {
-          get : function () {
-            console.log('Get slug', this.title);
-            return this.title.toLowerCase()
-                .replace(/[^\w ]+/g,'')
-                .replace(/ +/g,'-');
-          },
-          set : function (val) {
-            console.log('Dont');
-          }
-        });
     }
 
     $scope.close_modal= true;
-    $scope.articles = [];
+    var articlesInStore = localStorageService.get('articles');
+    $scope.articles = articlesInStore || [];
+
     $scope.article= new Article();
     $scope.currentArticle= null;
+
+    $scope.$watch('articles', function () {
+      localStorageService.set('articles', $scope.articles);
+    }, true);
 
   	var addArticle = function () {
   	  $scope.articles.push($scope.article);
