@@ -63,11 +63,7 @@ angular.module('frontarticlesApp')
       }
       
     };
-
-    $scope.init = function () {
-        console.log('Initing ...')
-    }    
-
+    
     $scope.newArticle = function() {
       $scope.currentArticle= null;
       $scope.article= new Article();
@@ -83,15 +79,13 @@ angular.module('frontarticlesApp')
     };
 
     $scope.removeArticle = function (article) {
-      console.log('removing ', article);
-
        $scope.articles= $scope.articles
                .filter(function (el) {
                 console.log('removing ', article===el);
                   return el!==article;
                });
 
-      toastr.info('O artigo foi removido', 'Information');
+      toastr.info('O artigo foi removido', 'Aten&ccedil;&atilde;o');
     };
 
     $scope.sendArticle = function() {
@@ -106,6 +100,7 @@ angular.module('frontarticlesApp')
     $scope.loadMore = function() {
 
       var newlimit= $scope.limit + 5;
+
       if($scope.articles.length < newlimit) {
         newlimit= $scope.articles.length;
       } 
