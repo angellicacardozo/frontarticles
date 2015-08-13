@@ -1,15 +1,11 @@
 <div class="container">
 
-  <div ng-if="articles.length===0" class="alert alert-info">
-    <strong>Info!</strong> Nenhum artigo cadastrado.
-  </div>
-
   <!-- Article list -->
   <div infinite-scroll='loadMore()'>
     <section>
       <h1>Artigos cadastrados</h1>
       <article  ng-repeat='article in articles | reverselist | limitTo:limit'>
-        <h1>{{article.title}}, {{article.title | slugPattern}}</h1>
+        <h1>{{article.title}}, <span class="mark slug">{{article.title | slugPattern}}</span></h1>
         <p class="excerpt">{{article.excerpt}}</p>
         <div class="btn-group" role="group" aria-label="...">
           <button ng-click="showArticle(article)" data-toggle="modal" data-target="#formModal" type="button" class="btn btn-default">Visualizar</button>
@@ -41,6 +37,10 @@
         </a>
       </article>
     </section>
+  </div>
+
+  <div ng-if="articles.length===0" class="alert alert-info">
+    <strong>Info!</strong> Nenhum artigo cadastrado.
   </div>
 
 <!-- Modal -->

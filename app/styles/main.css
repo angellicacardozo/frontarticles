@@ -85,8 +85,13 @@ article h1 {
   color: rgba(0, 0, 0, 0.5);
 }
 
+article .slug {
+    font-size: 20px;
+    font-style: italic;
+}
+
 .excerpt {
-    color: #ffffff;
+    color: #9f9f9f;
     font-style: italic;
     margin: 0 0 10px;
     padding: 10px 10px 10px 40px;

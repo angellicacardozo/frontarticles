@@ -17,7 +17,11 @@ angular.module('frontarticlesApp')
   })
   .filter('reverselist', function() {
     return function(items) {
-      return items.slice().reverse();
+      if(items.length > 0) {
+        return items.slice().reverse();
+      }
+
+      return items;
     };
   })
   .controller('MainCtrl', function ($scope, toastr, localStorageService) {
@@ -44,8 +48,8 @@ angular.module('frontarticlesApp')
     }, true);
 
   	var addArticle = function () {
+
   	  $scope.articles.push($scope.article);
-  	  $scope.article = '';
 
       toastr.success('O artigo foi inserido', 'Inserir...');
       $('#formModal').modal('hide');
@@ -71,6 +75,7 @@ angular.module('frontarticlesApp')
 
     $scope.showArticle = function(article) {
       $scope.currentArticle = article;
+      $scope.article= new Article();
     };
 
     $scope.editArticle = function(article) {
@@ -110,7 +115,10 @@ angular.module('frontarticlesApp')
 
     $scope.cancelArticle = function() {
 
-      console.log('Really cancel?');
+      // 'Really cancel?'
+
+      $scope.currentArticle= null;
+      $scope.article= new Article();
     };
 
     $scope.init = function() {
@@ -120,10 +128,7 @@ angular.module('frontarticlesApp')
           console.log('form on hidden.bs.modal');
 
           $scope.article= new Article();
-
-          if($scope.currentArticle !== null) {
-            $scope.currentArticle = null;
-          }
+          $scope.currentArticle = null;
         });
     };
 
