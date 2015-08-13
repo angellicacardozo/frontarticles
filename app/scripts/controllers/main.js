@@ -17,6 +17,9 @@ angular.module('frontarticlesApp')
   })
   .filter('reverselist', function() {
     return function(items) {
+
+      console.log('reversing', items);
+
       if(items.length > 0) {
         return items.slice().reverse();
       }
@@ -35,27 +38,32 @@ angular.module('frontarticlesApp')
     }
 
     $scope.limit= 5;
-
     $scope.close_modal= true;
+
     var articlesInStore = localStorageService.get('articles');
     $scope.articles = articlesInStore || [];
-
-    $scope.article= new Article();
-    $scope.currentArticle= null;
-
     $scope.$watch('articles', function () {
       localStorageService.set('articles', $scope.articles);
     }, true);
 
+    $scope.currentArticle= null;
+
+    // Objeto do formulário de edição/inserção
+    $scope.article= new Article();
+
   	var addArticle = function () {
 
-  	  $scope.articles.push($scope.article);
+      $scope.articles.push($scope.article);
 
-      toastr.success('O artigo foi inserido', 'Inserir...');
+      //Limpamos o formulário
+      $scope.article= new Article();
+
+      //Fechamos o modal
       $('#formModal').modal('hide');
   	};
 
     var updateArticle = function() {
+      //Buscamos o artigo
       var article = $scope.articles.find(function(element) {
           return element === $scope.article;
       });
@@ -63,23 +71,28 @@ angular.module('frontarticlesApp')
       if(article !== undefined) {
         article = $scope.article;
         toastr.success('O artigo foi alterado', 'Alterar...');
+
+        //Fechamos o modal após a edição
         $('#formModal').modal('hide');
-      }
-      
+      }           
     };
 
     $scope.newArticle = function() {
+      //Limpamos o contexto de leitura
       $scope.currentArticle= null;
       $scope.article= new Article();
     };
 
     $scope.showArticle = function(article) {
+      //Preparamos o contexto de leitura
       $scope.currentArticle = article;
       $scope.article= new Article();
     };
 
     $scope.editArticle = function(article) {
+      // Limpamos o contexto de leitura
       $scope.currentArticle= null;
+      // O formulário apresenta o artigo escolhido
       $scope.article = article;
     };
 
@@ -99,14 +112,15 @@ angular.module('frontarticlesApp')
         updateArticle();
       } else {
         addArticle();
-      }      
+      }     
+
     };
 
     $scope.loadMore = function() {
 
       var newlimit= $scope.limit + 5;
 
-      if($scope.articles.length < newlimit) {
+      if($scope.articles.length < newlimit && $scope.articles.lengt > 0) {
         newlimit= $scope.articles.length;
       } 
 
@@ -120,17 +134,4 @@ angular.module('frontarticlesApp')
       $scope.currentArticle= null;
       $scope.article= new Article();
     };
-
-    $scope.init = function() {
-
-        $('#formModal').on('hidden.bs.modal', function () {
-
-          console.log('form on hidden.bs.modal');
-
-          $scope.article= new Article();
-          $scope.currentArticle = null;
-        });
-    };
-
-    $scope.init();
   });
