@@ -17,7 +17,9 @@ describe('Controller: MainCtrl', function () {
     });
   }));
 
-  it('should have no items to start', function () {
+  it('should have no articles to start', function () {
     expect(scope.articles.length).toBe(0);
   });
+
+  // more tests ...
 });

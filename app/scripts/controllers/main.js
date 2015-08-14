@@ -38,16 +38,20 @@ angular.module('frontarticlesApp')
     $scope.limit= 5;
     $scope.close_modal= true;
 
+    // Configurando localStorageService ...
     var articlesInStore = localStorageService.get('articles');
     $scope.articles = articlesInStore || [];
     $scope.$watch('articles', function () {
       localStorageService.set('articles', $scope.articles);
     }, true);
 
+    // Nosso contexto de leitura se inicia nulo
     $scope.currentArticle= null;
 
     // Objeto do formulário de edição/inserção
     $scope.article= new Article();
+    // O rascunho do nosso artigo
+    $scope.articledraft= new Article();
 
   	var addArticle = function () {
 
@@ -62,17 +66,32 @@ angular.module('frontarticlesApp')
 
     var updateArticle = function() {
       //Buscamos o artigo
-      var article = $scope.articles.find(function(element) {
-          return element === $scope.article;
-      });
+      var article = searchArticleInStorage($scope.article);
 
       if(article !== undefined) {
-        article = $scope.article;
+        applyChangesInStorage(article, $scope.article);
         toastr.success('O artigo foi alterado', 'Alterar...');
 
         //Fechamos o modal após a edição
         $('#formModal').modal('hide');
+
+        //Limpamos nosso rascunho
+        $scope.articledraft= new Article();
       }           
+    };
+
+    var searchArticleInStorage = function(article) {
+      return $scope.articles.find(function(element) {
+          return element === article;
+      });
+    };
+
+    var applyChangesInStorage = function(article, draft) {
+      $scope.articles.forEach(function(element) {
+          if(element === article) {
+            element.title= draft.title;
+          }
+      });
     };
 
     $scope.newArticle = function() {
@@ -84,20 +103,25 @@ angular.module('frontarticlesApp')
     $scope.showArticle = function(article) {
       //Preparamos o contexto de leitura
       $scope.currentArticle = article;
-      $scope.article= new Article();
     };
 
     $scope.editArticle = function(article) {
       // Limpamos o contexto de leitura
       $scope.currentArticle= null;
+
+      // Configuramos o rascunho para quando revertemos a alteração
+      $scope.articledraft.title= article.title;
+      $scope.articledraft.excerpt= article.excerpt;
+      $scope.articledraft.content= article.content;
+      $scope.articledraft.tags= article.tags;
+
       // O formulário apresenta o artigo escolhido
       $scope.article = article;
     };
 
     $scope.removeArticle = function (article) {
-       $scope.articles= $scope.articles
+      $scope.articles= $scope.articles
                .filter(function (el) {
-                console.log('removing ', article===el);
                   return el!==article;
                });
 
@@ -107,6 +131,7 @@ angular.module('frontarticlesApp')
     $scope.sendArticle = function() {
 
       if($.inArray($scope.article, $scope.articles) === 0) {
+
         updateArticle();
       } else {
         addArticle();
@@ -127,7 +152,14 @@ angular.module('frontarticlesApp')
 
     $scope.cancelArticle = function() {
 
-      // 'Really cancel?'
+      // Revertemos alterações
+      // Estamos em um contexto de edição/insercao?
+      if($scope.currentArticle===null) {
+        var article = searchArticleInStorage($scope.article);
+        if(article!==undefined) {
+          applyChangesInStorage(article, $scope.articledraft);
+        }
+      }
 
       $scope.currentArticle= null;
       $scope.article= new Article();

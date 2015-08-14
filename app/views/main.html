@@ -49,14 +49,11 @@
 
     <!-- Modal content-->
     <div class="modal-content">
-
-
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">
           <span ng-if="currentArticle!==null">{{currentArticle.title}} | Artigo</span>
-          <span ng-if="article.title!=='' && currentArticle===null">Editar {{article.title}}</span>
-          <span ng-if="article.title==='' &&currentArticle===null">Novo Artigo</span>
+          <span ng-if="currentArticle===null">Enviando artigo</span>
         </h4>
       </div>
       <div class="modal-body">
@@ -109,7 +106,5 @@
         <button ng-click="cancelArticle()" type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
       </div>
     </div>
-
-
 </div>
 </div>
