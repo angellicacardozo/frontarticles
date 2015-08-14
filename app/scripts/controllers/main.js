@@ -90,6 +90,9 @@ angular.module('frontarticlesApp')
       $scope.articles.forEach(function(element) {
           if(element === article) {
             element.title= draft.title;
+            element.excerpt= draft.excerpt;
+            element.content= draft.content;
+            element.tags= draft.tags;
           }
       });
     };
