@@ -81,9 +81,16 @@ angular.module('frontarticlesApp')
     };
 
     var searchArticleInStorage = function(article) {
-      return $scope.articles.find(function(element) {
-          return element === article;
-      });
+
+        var a;
+        $scope.articles.some(function (element) {
+            if (element === article) {
+                a = element;
+                return true;
+            }
+        });
+
+        return a;
     };
 
     var applyChangesInStorage = function(article, draft) {
