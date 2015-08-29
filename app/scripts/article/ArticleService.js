@@ -10,10 +10,15 @@
 
 	function StorageService(localStorageService) {
 
-		//var articlesInStore = localStorageService.get('articles');
+		this.articles = localStorageService.get('articles') || [];
 
 		this.add = function(article) {
-			console.log('adding', article);
+			this.articles.push(article);
+			localStorageService.set('articles', this.articles);
+		};
+
+		this.list= function() {
+			return this.articles || [];
 		};
 	}
 })();

@@ -1,1 +1,10 @@
-<h2>Lista de artigos</h2>
+<section ng-controller="ArticleController">
+	<h2>Lista de artigos</h2>
+	<article ng-repeat='model in article.getAll()'>
+		<h1>{{model.title}}</h1>
+		<p class="excerpt">{{model.excerpt}}</p>
+        <div class="btn-group" role="group" aria-label="...">
+          <a href="#" class="btn btn-default">Visualizar</a>
+        </div>
+	</article>
+</section>

@@ -27,8 +27,14 @@ function ArticleController(StorageService) {
     }
 
     this.model= new Article();
+    this.models= [];
 
     this.doSave = function() {
     	StorageService.add(this.model);
+    	this.model= new Article();
+    };
+
+    this.getAll = function() {
+    	return StorageService.list();
     };
 }
