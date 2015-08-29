@@ -1,0 +1,33 @@
+<h2>Cadastrar artigo</h2>
+
+<form ng-controller="ArticleController" class="form-horizontal" name="articleForm" ng-submit="article.doSave()">
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="titulo">Titulo:</label>
+    <div class="col-sm-10">
+      <input id="titulo" name="titulo" ng-required="true" placeholder="Pensa em escrever o que?" ng-model="article.model.title">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="titulo">Tags:</label>
+    <div class="col-sm-10">
+      <input ng-required="true" ng-model="article.model.tags">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="titulo">Sum&aacute;rio:</label>
+    <div class="col-sm-10">
+      <textarea ng-model="article.model.excerpt" ng-required="true"></textarea>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="titulo">Conte&uacute;do:</label>
+    <div class="col-sm-10">
+      <textarea ng-model="article.model.content" ng-required="true"></textarea>
+    </div>
+  </div>
+
+  <input type="submit" class="btn btn-primary" value="Salvar">
+</form>
