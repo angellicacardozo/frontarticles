@@ -11,7 +11,11 @@ angular.module('articleModule')
       })
 	});
 
-function ListArticleController(StorageService, ShareArticleService) {
+function ListArticleController(StorageService, ShareArticleService, flash) {
+
+    this.flash= flash;
+
+    this.flash.showMessage();
 
     this.getAll = function() {
       return StorageService.list();
@@ -22,6 +26,10 @@ function ListArticleController(StorageService, ShareArticleService) {
     };
 
     this.doEdit =function(model) {
+      ShareArticleService.set(model);
+    }; 
+
+    this.doDelete =function(model) {
       ShareArticleService.set(model);
     }; 
 }

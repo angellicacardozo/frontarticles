@@ -1,11 +1,16 @@
 <section ng-controller="ListArticleController">
-	<h2>Lista de artigos</h2>
+	<h1>Artigos cadastrados</h1>
 	<article ng-repeat='model in article.getAll()'>
 		<h1>{{model.title}}, {{model.title | slugPattern}}</h1>
 		<p class="excerpt">{{model.excerpt}}</p>
         <div class="btn-group" role="group" aria-label="...">
           <a ng-click="article.doRead(model)" ng-href="#/read/{{model.title | slugPattern}}" class="btn btn-default">Visualizar</a>
           <a ng-click="article.doEdit(model)" ng-href="#/edit/{{model.title | slugPattern}}" class="btn btn-default">Editar</a>
+          <a ng-click="article.doDelete(model)" ng-href="#/delete/{{model.title | slugPattern}}" class="btn btn-default">Remover</a>
         </div>
 	</article>
 </section>
+
+<div ng-if="article.getAll().length===0" class="alert alert-info">
+	<strong>Info!</strong> Nenhum artigo cadastrado.
+</div>

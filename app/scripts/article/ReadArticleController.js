@@ -12,7 +12,5 @@ angular.module('articleModule')
 	});
 
 function ReadArticleController(ShareArticleService) {
-
   this.model= ShareArticleService.get();
-
 }

@@ -32,6 +32,15 @@
 		this.list= function() {
 			return this.articles || [];
 		};
+
+		this.delete= function(article) {
+			this.articles= this.articles
+				.filter(function (el) {
+					return el!==article;
+				});
+
+			localStorageService.set('articles', this.articles);
+		};
 	}
 
 	function ShareArticleService() {

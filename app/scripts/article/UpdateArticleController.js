@@ -11,11 +11,13 @@ angular.module('articleModule')
       });
 	});
 
-function UpdateArticleController(ShareArticleService, StorageService) {
+function UpdateArticleController(ShareArticleService, StorageService, flash, $location) {
 
   this.model= ShareArticleService.get();
 
   this.doUpdate= function() {
     StorageService.update(this.model);
+    flash.setMessage('Artigo editado com sucesso!', 'success');
+    $location.path("/");
   };
 }

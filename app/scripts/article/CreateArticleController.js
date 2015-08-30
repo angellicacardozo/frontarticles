@@ -11,7 +11,7 @@ angular.module('articleModule')
       });
 	});
 
-function CreateArticleController(StorageService) {
+function CreateArticleController(StorageService, $location, flash) {
 
   function Article() {
         this.title= "";
@@ -25,6 +25,7 @@ function CreateArticleController(StorageService) {
   
   this.doSave = function() {
       StorageService.add(this.model);
-      this.model= new Article();
+      flash.setMessage('Artigo cadastrado com sucesso!', 'success');
+      $location.path("/");
   };
 }

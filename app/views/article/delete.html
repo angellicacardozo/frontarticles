@@ -1,0 +1,19 @@
+<h2>Deseja remover o artigo?</h2>
+
+<form ng-controller="DeleteArticleController" class="form-horizontal" name="articleForm" ng-submit="article.doDelete()">
+<dl>
+  <dt>Título</dt>
+  <dd>{{article.model.title}}</dd>
+
+  <dt>Sum&aacute;rio</dt>
+  <dd>{{article.model.excerpt}}</dd>
+
+  <dt>Conte&uacute;do:</dt>
+  <dd>{{article.model.content}}</dd>
+</dl>
+
+<div class="btn-group" role="group" aria-label="...">
+    <input type="submit" class="btn btn-primary" value="Confirmar">
+    <a class="btn btn-default" ng-href="#/">Cancelar</a>
+</div> 
+</form>
